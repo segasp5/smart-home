@@ -22,7 +22,7 @@ public class Application {
         while (event != null) {
 
             for (EventHandler eventHandler : eventHandlers) {
-                eventHandler.handle(event, smartHome);
+                eventHandler.handle(smartHome, event);
             }
        /*
             System.out.println("Got event: " + event);
