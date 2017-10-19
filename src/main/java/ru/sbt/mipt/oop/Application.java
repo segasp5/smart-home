@@ -1,6 +1,10 @@
 package ru.sbt.mipt.oop;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static ru.sbt.mipt.oop.SensorEventType.*;
 
 public class Application {
 
@@ -9,16 +13,40 @@ public class Application {
         SmartHome smartHome = readSmartHome.getSmartHome();
         // начинаем цикл обработки событий
         SensorEvent event = getNextSensorEvent();
+
+
+        Collection<EventHandler> eventHandlers = configureHandlers();
+
+
+
         while (event != null) {
+
+            for (EventHandler eventHandler : eventHandlers) {
+                eventHandler.handle(event, smartHome);
+            }
+       /*
             System.out.println("Got event: " + event);
-            ExternalEventProcessing.lightEvent(smartHome, event);
-            ExternalEventProcessing.doorEvent(smartHome, event);
+            if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
+                new LightsEventsProcessor().handle(event, smartHome);
+            }
+            if (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED) {
+                DoorEventsProcessor.processDoorEvent(smartHome, event);
+            }
+        */
             event = getNextSensorEvent();
         }
+
+    }
+
+    private static Collection<EventHandler> configureHandlers() {
+        Collection<EventHandler> handlers = new ArrayList<>();
+        handlers.add(new LightEventProcessor());
+        handlers.add(new DoorEventProcessor());
+        return handlers;
     }
 
     protected static void sendCommand(SensorCommand command) {
-        System.out.println("Pretent we're sending command " + command);
+        System.out.println("Pretend we're sending command " + command);
     }
 
     private static SensorEvent getNextSensorEvent() {
