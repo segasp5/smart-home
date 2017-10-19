@@ -42,6 +42,7 @@ public class Application {
         Collection<EventHandler> handlers = new ArrayList<>();
         handlers.add(new LightEventProcessor());
         handlers.add(new DoorEventProcessor());
+        handlers.add(new DoorScenarioRunner());
         return handlers;
     }
 
