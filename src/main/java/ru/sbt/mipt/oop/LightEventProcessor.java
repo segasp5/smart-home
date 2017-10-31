@@ -11,7 +11,11 @@ public class LightEventProcessor implements EventHandler {
 
     @Override
     public void handle(SmartHome smartHome, SensorEvent event) {
-        if (!(event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF)) return;
+        System.out.println("\tIn LightEventProcessor");
+        if (!(event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF)) {
+            System.out.println("\treturn");
+            return;
+        }
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals(event.getObjectId())) {

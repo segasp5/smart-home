@@ -10,16 +10,18 @@ import java.util.Collection;
  */
 public class SensorEventObserver {
 
-    Collection<EventHandler> eventHandlers = new ArrayList<>();
-    public SmartHome smartHome;
+    private Collection<EventHandler> eventHandlers = new ArrayList<>();
+    private SmartHome smartHome;
 
     public SensorEventObserver(SmartHome smartHome){
         this.smartHome = smartHome;
     }
+
     public void runEventCycle() {
         EventProducer randomEventProducer = new RandomEventProducer();
         SensorEvent event = randomEventProducer.getNextSensorEvent();
         while (event != null) {
+            System.out.println("\n\nEvent: " + event);
 
             for (EventHandler eventHandler : eventHandlers) {
                 eventHandler.handle(smartHome, event);

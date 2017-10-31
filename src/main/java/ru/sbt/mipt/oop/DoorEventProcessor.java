@@ -10,7 +10,11 @@ public class DoorEventProcessor implements EventHandler {
 
     @Override
     public void handle(SmartHome smartHome, SensorEvent event) {
-        if (!(event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) return;
+        System.out.println("\tIn DoorEventProcessor");
+        if (!(event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED)) {
+            System.out.println("\treturn");
+            return;
+        }
         for (Room room : smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals(event.getObjectId())) {

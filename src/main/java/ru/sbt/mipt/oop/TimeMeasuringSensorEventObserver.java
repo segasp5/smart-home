@@ -8,4 +8,5 @@ public class TimeMeasuringSensorEventObserver extends SensorEventObserver {
     public TimeMeasuringSensorEventObserver(SmartHome smartHome) {
         super(smartHome);
     }
+
 }

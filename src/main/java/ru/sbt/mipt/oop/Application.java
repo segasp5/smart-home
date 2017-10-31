@@ -16,14 +16,13 @@ public class Application {
 
     }
 
-    private static void configureHandlers(SensorEventObserver observer) {
-        Collection<EventHandler> handlers = new ArrayList<>();
-        observer.addHandler(new LightEventProcessor());
-        observer.addHandler(new DoorEventProcessor());
-        observer.addHandler(new DoorScenarioRunner());
+    static void configureHandlers(SensorEventObserver observer) {
+        observer.addHandler(new TimeMeasuringEventHandler(new LightEventProcessor()));
+        observer.addHandler(new TimeMeasuringEventHandler(new DoorEventProcessor()));
+        observer.addHandler(new TimeMeasuringEventHandler(new DoorScenarioRunner()));
     }
 
-    protected static void sendCommand(SensorCommand command) {
+    static void sendCommand(SensorCommand command) {
         System.out.println("Pretend we're sending command " + command);
     }
 }
