@@ -26,4 +26,20 @@ public class DoorScenarioRunner implements EventHandler {
             }
         }
     }
+
+    void turnOffLight(SmartHome smartHome){
+        smartHome.executeAction(obj -> {
+            if(obj instanceof Light){
+                Light light = (Light)obj;
+                light.setOn(false);
+            }
+        });
+        for (Room room : smartHome.getRooms()) {
+            for (Light light : smartHome.getLights()) {
+                light.setOn(false);
+                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
+                Application.sendCommand(command);
+            }
+        }
+    }
 }
