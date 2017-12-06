@@ -9,5 +9,9 @@ public interface AlarmSystemState {
 
     void turnOn();
 
+    void turnOff();
+
     void onEvent(SensorEvent sensorEvent);
+
+    void enterPassword(String password);
 }

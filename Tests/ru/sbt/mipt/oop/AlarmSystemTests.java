@@ -41,6 +41,29 @@ public class AlarmSystemTests {
         assertEquals(AlarmSystemStateEnum.OFF, alarmSystem.getState());
     }
 
+    @Test
+    public void testOnSystemGetsEventWithWrongPasswordGoesAlarm (){
+        AlarmSystem alarmSystem = new AlarmSystem();
+        alarmSystem.turnOn();
+
+        alarmSystem.onEvent(createSensorEvent());
+
+        alarmSystem.enterPassword("123 ");
+
+        assertEquals(AlarmSystemStateEnum.ALARM, alarmSystem.getState());
+    }
+
+    @Test
+    public void testOnSystemGetsEventWithCorrectPasswordGoesOn (){
+        AlarmSystem alarmSystem = new AlarmSystem();
+        alarmSystem.turnOn();
+
+        alarmSystem.onEvent(createSensorEvent());
+
+        alarmSystem.enterPassword("1234");
+
+        assertEquals(AlarmSystemStateEnum.ON, alarmSystem.getState());
+    }
 
     @Test
     public void testTurnOnDoesNothingWhenSystemIsWaiting(){
@@ -52,5 +75,39 @@ public class AlarmSystemTests {
 
         assertEquals(AlarmSystemStateEnum.WAIT_FOR_PASSWORD, alarmSystem.getState());
     }
+
+    @Test
+    public void testOnSystemTurnOffWithoutPassword (){
+        AlarmSystem alarmSystem = new AlarmSystem();
+        alarmSystem.turnOn();
+
+        alarmSystem.turnOff();
+
+        assertEquals(AlarmSystemStateEnum.WAIT_FOR_PASSWORD, alarmSystem.getState());
+    }
+
+    @Test
+    public void testOnSystemTurnOffWithWrongPassword (){
+        AlarmSystem alarmSystem = new AlarmSystem();
+        alarmSystem.turnOn();
+
+        alarmSystem.turnOff();
+        alarmSystem.enterPassword("123 ");
+
+        assertEquals(AlarmSystemStateEnum.ALARM, alarmSystem.getState());
+    }
+
+    @Test
+    public void testOnSystemTurnOffWithCorrectPassword (){
+        AlarmSystem alarmSystem = new AlarmSystem();
+        alarmSystem.turnOn();
+
+        alarmSystem.turnOff();
+        alarmSystem.enterPassword("1234");
+
+        assertEquals(AlarmSystemStateEnum.OFF, alarmSystem.getState());
+    }
+
+
 
 }
