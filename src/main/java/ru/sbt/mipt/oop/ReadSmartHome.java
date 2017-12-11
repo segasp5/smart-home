@@ -6,10 +6,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class readSmartHome {
-    static SmartHome getSmartHome() throws IOException {
+public class ReadSmartHome {
+    static SmartHome formJSON() throws IOException {
         Gson gson = new Gson();
         String json = new String(Files.readAllBytes(Paths.get("smart-home-1.js")));
         return gson.fromJson(json, SmartHome.class);
+    }
+
+    static SmartHome formSthElse() throws IOException {
+        return null;
     }
 }

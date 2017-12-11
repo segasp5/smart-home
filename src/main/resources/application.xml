@@ -7,7 +7,7 @@
     <bean id="DoorEventProcessor" class="ru.sbt.mipt.oop.DoorEventProcessor"/>
     <bean id="DoorScenarioRunner" class="ru.sbt.mipt.oop.DoorScenarioRunner"/>
 
-    <bean id="smartHome" class="ru.sbt.mipt.oop.readSmartHome" factory-method="getSmartHome"/>
+    <bean id="smartHome" class="ru.sbt.mipt.oop.ReadSmartHome" factory-method="getSmartHome"/>
     <bean id="sensorEventObserver" class="ru.sbt.mipt.oop.SensorEventObserver">
         <constructor-arg index="0" ref="smartHome">
         </constructor-arg>

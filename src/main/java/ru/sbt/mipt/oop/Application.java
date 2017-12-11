@@ -17,7 +17,7 @@ public class Application {
         sensorEventObserver.runEventCycle();
         /*
         // считываем состояние дома из файла
-        SmartHome smartHome = readSmartHome.getSmartHome();
+        SmartHome smartHome = ReadSmartHome.formJSON();
         SensorEventObserver sensorEventObserver = new SensorEventObserver(smartHome);
         configureHandlers(sensorEventObserver);
         sensorEventObserver.runEventCycle();
@@ -30,6 +30,7 @@ public class Application {
         observer.addHandler(new DoorEventProcessor());
         observer.addHandler(new DoorScenarioRunner());
         observer.setHandlers(handlers);
+
         /*
         observer.addHandler(new TimeMeasuringEventHandler(new LightEventProcessor()));
         observer.addHandler(new TimeMeasuringEventHandler(new DoorEventProcessor()));
