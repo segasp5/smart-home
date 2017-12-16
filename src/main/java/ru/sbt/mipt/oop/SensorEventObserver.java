@@ -38,4 +38,8 @@ public class SensorEventObserver {
     public void setHandlers(List<EventHandler> handlers) {
         this.eventHandlers = handlers;
     }
+
+    public Collection <EventHandler> getHandlers(){
+        return this.eventHandlers;
+    }
 }
