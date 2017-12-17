@@ -17,4 +17,9 @@ public class TimeMeasuringEventHandler implements EventHandler {
         System.out.println("finish handling");
         System.out.println("t = " + (end - start)/1000 + " mks -----------  " + event + "\n");
     }
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
+    }
 }

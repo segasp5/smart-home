@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class DoorScenarioRunner implements EventHandler {
+public class DoorScenarioRunner implements EventHandler, Actionable {
 
     @Override
     public void handle(SmartHome smartHome, SensorEvent event) {
@@ -27,6 +27,8 @@ public class DoorScenarioRunner implements EventHandler {
         }
     }
 
+
+
     void turnOffLight(SmartHome smartHome){
         smartHome.executeAction(obj -> {
             if(obj instanceof Light){
@@ -41,5 +43,10 @@ public class DoorScenarioRunner implements EventHandler {
                 Application.sendCommand(command);
             }
         }
+    }
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
     }
 }

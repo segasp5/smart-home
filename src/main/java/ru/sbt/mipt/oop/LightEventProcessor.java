@@ -6,7 +6,7 @@ import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 /**
  * Created by user6 on 13.10.2017.
  */
-public class LightEventProcessor implements EventHandler {
+public class LightEventProcessor implements EventHandler, Actionable {
 
 
     @Override
@@ -29,5 +29,13 @@ public class LightEventProcessor implements EventHandler {
                 }
             }
         }
+    }
+
+
+
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
     }
 }

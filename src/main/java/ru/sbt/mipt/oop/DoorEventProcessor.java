@@ -6,7 +6,7 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 /**
  * Created by user6 on 13.10.2017.
  */
-public class DoorEventProcessor implements EventHandler {
+public class DoorEventProcessor implements EventHandler, Actionable {
 
     @Override
     public void handle(SmartHome smartHome, SensorEvent event) {
@@ -31,5 +31,11 @@ public class DoorEventProcessor implements EventHandler {
                 }
             }
         }
+    }
+
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
     }
 }
